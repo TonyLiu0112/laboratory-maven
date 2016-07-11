@@ -3,7 +3,10 @@ package com.liuboyu.jdk8.streams;
 import com.liuboyu.jdk8.Album;
 import com.liuboyu.jdk8.Artist;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -102,7 +105,7 @@ public class Demo1 {
      * @return
      */
     private static long memberCount(List<Artist> artists) {
-        return artists.stream().map(artist -> artist.getMembers().size()).count();
+        return artists.stream().map(artist -> artist.getMembers().count()).count();
     }
 
     /**

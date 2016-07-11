@@ -1,6 +1,7 @@
 package com.liuboyu.jdk8;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * 艺术家类
@@ -17,7 +18,7 @@ public class Artist {
     /**
      * 成员数量,如果是乐队可能就是多个成员了
      */
-    private List<String> members;
+    private Stream<String> members;
 
     /**
      * 国籍
@@ -47,11 +48,11 @@ public class Artist {
         this.origin = origin;
     }
 
-    public List<String> getMembers() {
+    public Stream<String> getMembers() {
         return members;
     }
 
-    public void setMembers(List<String> members) {
+    public void setMembers(Stream<String> members) {
         this.members = members;
     }
 }

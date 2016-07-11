@@ -3,6 +3,7 @@ package com.liuboyu.jdk8.classlibraries;
 import com.liuboyu.jdk8.Artist;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -24,7 +25,7 @@ public interface Performance {
      * @return
      */
     default Stream<List<String>> getAllMusicians(Stream<Artist> stream) {
-        return stream.map(artist -> artist.getMembers());
+        return stream.map(artist -> artist.getMembers().collect(Collectors.toList()));
     }
 
 }
