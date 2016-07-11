@@ -19,9 +19,9 @@ public class Procuder {
 
 	public Procuder() {
         Properties properties = new Properties();
-        properties.put("zk.connect", "127.0.0.1:2181");
+        properties.put("zk.connect", "192.168.0.216:2181");
 //        properties.put("serializer.class", "kafka.serializer.StringEncoder");
-        properties.put("metadata.broker.list", "127.0.0.1:9092");
+        properties.put("metadata.broker.list", "192.168.0.211:9092,192.168.0.212:9092,192.168.0.213:9092");
 
         ProducerConfig config = new ProducerConfig(properties);
 		producer = new Producer<>(config);
