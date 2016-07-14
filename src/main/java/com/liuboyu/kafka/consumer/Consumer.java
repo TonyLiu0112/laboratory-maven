@@ -52,14 +52,13 @@ public class Consumer implements Runnable {
         WifiRawShortDataParser wifiRawShortDataParser = new WifiRawShortDataParser();
         while (iterator.hasNext()) {
             MessageAndMetadata<byte[], byte[]> message = iterator.next();
-            System.out.println("收到数据 >>>>>>>>> " + message.message().length);
             try {
 
                 RawDataRecord record = wifiRawShortDataParser.parse(message.message());
 //                System.out.println(String.format("mac[%s], smac[%s], time[%s]", record.getDmac(), record.getSmac(), sdf.format(new Date(record.getMaxstamp()))));
                 if (record.getSmac().equals("cdcf4371fa45")) {
                     count++;
-                    System.out.println("数据条数 " + count);
+                    System.out.println("cdcf4371fa45数据条数 " + count);
                 }
             } catch (ParserException e) {
                 e.printStackTrace();
