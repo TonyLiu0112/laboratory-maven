@@ -1,13 +1,15 @@
 package com.liuboyu.io.netty.google.protobuff.usecase.client;
 
 import com.liuboyu.io.netty.google.protobuff.entity.OrderProtos;
-import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 
 /**
  * Created by Tony on 7/14/16.
  */
-public class SubReqClientHandler extends ChannelHandlerAdapter {
+public class SubReqClientHandler extends ChannelInboundHandlerAdapter {
+
+
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
@@ -38,4 +40,5 @@ public class SubReqClientHandler extends ChannelHandlerAdapter {
         super.exceptionCaught(ctx, cause);
         ctx.close();
     }
+
 }

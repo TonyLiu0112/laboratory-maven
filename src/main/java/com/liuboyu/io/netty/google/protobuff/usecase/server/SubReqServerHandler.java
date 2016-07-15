@@ -1,16 +1,16 @@
 package com.liuboyu.io.netty.google.protobuff.usecase.server;
 
 import com.liuboyu.io.netty.google.protobuff.entity.OrderProtos;
-import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.SimpleChannelInboundHandler;
 
 /**
  * Created by Tony on 7/14/16.
  */
-public class SubReqServerHandler extends ChannelHandlerAdapter {
+public class SubReqServerHandler extends SimpleChannelInboundHandler {
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+    public void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
         OrderProtos.AddressBook addressBook = (OrderProtos.AddressBook) msg;
         addressBook.getPersonList().forEach(person -> {
             System.out.println("person Id: " + person.getId());
