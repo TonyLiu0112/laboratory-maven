@@ -3,6 +3,7 @@ package com.liuboyu.jdk8.class1;
 import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
 
+import javax.annotation.Nullable;
 import javax.swing.*;
 import javax.swing.text.DateFormatter;
 import java.text.SimpleDateFormat;
@@ -30,7 +31,7 @@ interface IntPred {
 
 class Test1 {
     boolean check(Predicate<Integer> predicate) {
-        return false;
+        return predicate.apply(99);
     }
 
 //    boolean check(IntPred predicate) {
@@ -39,7 +40,7 @@ class Test1 {
 
     public static void main(String[] args) {
         Test1 t = new Test1();
-        t.check(x -> x > 5);
+        System.out.println(t.check(input -> input > 100));;
     }
 
 }

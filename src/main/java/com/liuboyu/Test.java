@@ -3,9 +3,8 @@ package com.liuboyu;
 public class Test {
 
     public static void main(String[] args) {
-        System.out.println(2 ^ 2);
         B b = new B();
-        System.out.println(b.item.length);
+        System.out.println(b.getIndex());
         System.out.println(System.getProperty("java.io.tmpdir"));
     }
 

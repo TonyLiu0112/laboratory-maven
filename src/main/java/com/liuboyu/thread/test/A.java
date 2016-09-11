@@ -1,28 +1,27 @@
 package com.liuboyu.thread.test;
 
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.atomic.AtomicBoolean;
-
 public class A implements Runnable {
 
-	private static AtomicBoolean flag = new AtomicBoolean(false);
+	private static volatile boolean flag = true;
+    private static int aaa = 1;
 
 	@Override
 	public void run() {
-		
-		while(!flag.get()) {
-			
-		}
-		
+
+        while(flag) {
+        }
+		aaa = 2;
 	}
 	
 	public static void main(String[] args) throws InterruptedException {
 		Thread t = new Thread(new A(), "liuboyu-t1");
 		t.start();
 		Thread.sleep(1000);
-		A.flag.set(true);
-		System.out.println(A.flag.get());
-
+		flag = false;
+		for(;;) {
+            System.out.println(aaa);
+            Thread.currentThread().sleep(1000);
+        }
 	}
 	
 	

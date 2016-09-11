@@ -24,7 +24,7 @@ public class StreamDemo {
      */
     private void t2() {
         List<String> collected = Stream.of("a", "b", "c").map(s -> s.toUpperCase()).collect(Collectors.toList());
-        collected.forEach(s -> System.out.println(s));
+        collected.forEach(System.out::print);
     }
 
     public static void main(String[] args) {

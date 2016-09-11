@@ -1,6 +1,9 @@
 package com.liuboyu.jdk8.parallel;
 
+import org.apache.qpid.proton.codec.messaging.SourceType;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -34,8 +37,12 @@ public class work1 {
      *     return linkedListOfNumbers.stream().reduce(5, (acc, x) -> x * acc);
      * }
      *
-     * 答: 并行计算限制, 1. 初始值必须为组合函数的恒等值 2. 组合操作必须符合结合律. 3. 要避免持有锁.
+     * 答: 并行计算限制
+     *  1. 初始值必须为组合函数的恒等值
+     *  2. reduce操作必须符合结合律.
+     *  3. 要避免持有锁.
      * 很显然这里违反了限制1.
+     *
      */
     public static int parallelThrough(List<Integer> linkedListOfNumbers) {
         return linkedListOfNumbers.parallelStream().reduce(1, (acc, x) -> x * acc) * 5;
@@ -55,23 +62,31 @@ public class work1 {
         return arrayListOfNumbers.parallelStream().map(x -> x * x).reduce(0, (acc, x) -> acc + x);
     }
 
-
+    public static void arraySums(int[] items) {
+        Arrays.parallelPrefix(items, (left, right) -> left + right);
+        IntStream.range(0, items.length).forEach(value -> {
+            System.out.println(items[value]);
+        });
+    }
 
     public static void main(String[] args) {
-        // 测试1
-        System.out.println(parallelSum(IntStream.range(0, 10)));
+//        // 测试1
+//        System.out.println(parallelSum(IntStream.range(0, 10)));
+//
+//        // 测试2
+//        System.out.println(parallelThrough(Stream.of(1, 2, 3, 4, 5).collect(Collectors.toList())));
+//
+//        // 测试3
+//        List<Integer> linked = new ArrayList<>();
+//        for (int i = 0; i < 1000000; i++) {
+//            linked.add(Integer.valueOf(i));
+//        }
+//        long start = System.currentTimeMillis();
+//        System.out.println(fastSumOfSquares(linked));
+//        System.out.println("use time:" + (System.currentTimeMillis() - start) + "ms");
 
-        // 测试2
-        System.out.println(parallelThrough(Stream.of(1, 2, 3, 4, 5).collect(Collectors.toList())));
-
-        // 测试3
-        List<Integer> linked = new ArrayList<>();
-        for (int i = 0; i < 1000000; i++) {
-            linked.add(Integer.valueOf(i));
-        }
-        long start = System.currentTimeMillis();
-        System.out.println(fastSumOfSquares(linked));
-        System.out.println("use time:" + (System.currentTimeMillis() - start) + "ms");
+        int[] arr = {1, 2, 3, 4, 5};
+        arraySums(arr);
 
     }
 
