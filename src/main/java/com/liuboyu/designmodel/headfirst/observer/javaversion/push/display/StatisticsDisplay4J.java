@@ -1,6 +1,8 @@
-package com.liuboyu.designmodel.headfirst.observer.javaversion.pull;
+package com.liuboyu.designmodel.headfirst.observer.javaversion.push.display;
 
 import com.liuboyu.designmodel.headfirst.observer.DisplayElement;
+import com.liuboyu.designmodel.headfirst.observer.javaversion.push.WeatherData4J;
+import com.liuboyu.designmodel.headfirst.observer.javaversion.push.entity.Metadata;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -9,21 +11,19 @@ import java.util.Observer;
  * Created by Tony on 9/11/16.
  */
 public class StatisticsDisplay4J implements Observer, DisplayElement {
-    private WeatherData4J weatherData4J;
     private float temperature;
     private float pressure;
 
     public StatisticsDisplay4J(WeatherData4J weatherData4J) {
-        this.weatherData4J = weatherData4J;
         weatherData4J.addObserver(this);
     }
 
     @Override
     public void update(Observable o, Object arg) {
         if (o instanceof WeatherData4J) {
-            WeatherData4J weatherData4J = (WeatherData4J) o;
-            this.temperature = weatherData4J.getTemperature();
-            this.pressure = weatherData4J.getPressure();
+            Metadata metadata = (Metadata) arg;
+            this.temperature = metadata.getTemperature();
+            this.pressure = metadata.getPressure();
             display();
         }
     }
