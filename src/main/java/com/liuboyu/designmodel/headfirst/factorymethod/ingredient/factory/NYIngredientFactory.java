@@ -4,7 +4,7 @@ import com.liuboyu.designmodel.headfirst.factorymethod.ingredient.*;
 import com.liuboyu.designmodel.headfirst.factorymethod.ingredient.ny.*;
 
 /**
- * 纽约地区的原料工厂类
+ * 纽约地区的原料工厂类(抽象工厂的具体实现)
  * <p>
  * Created by Tony on 9/17/16.
  */

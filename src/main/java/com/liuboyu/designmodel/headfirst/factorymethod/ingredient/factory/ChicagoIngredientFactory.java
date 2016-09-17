@@ -10,7 +10,7 @@ import com.liuboyu.designmodel.headfirst.factorymethod.ingredient.ny.Onion;
 import com.liuboyu.designmodel.headfirst.factorymethod.ingredient.ny.SlicedPepperoni;
 
 /**
- * 芝加哥地区的原料工厂类
+ * 芝加哥地区的原料工厂类(抽象工厂的具体实现)
  * <p>
  * Created by Tony on 9/17/16.
  */
