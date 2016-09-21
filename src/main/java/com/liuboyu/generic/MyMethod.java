@@ -18,6 +18,7 @@ public class MyMethod {
     public static void main(String[] args) {
         Set<? extends Box> s = new HashSet<>();
         MyBox m = new MyBox();
+        MyGinterfaces<Box> myGinterfaces = new MyGinterfaces(new Box());
     }
 
 }

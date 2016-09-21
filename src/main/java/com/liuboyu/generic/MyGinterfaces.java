@@ -5,6 +5,9 @@ package com.liuboyu.generic;
  */
 public class MyGinterfaces<E extends Box> implements Ginterface<E> {
 
+    public E e;
 
-
+    public MyGinterfaces(E e) {
+        this.e = e;
+    }
 }

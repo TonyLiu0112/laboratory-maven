@@ -9,7 +9,7 @@ import java.util.List;
 public class Demo {
 
     public static void main(String[] args) {
-        MyGinterfaces<Box> mg = new MyGinterfaces<>();
+        MyGinterfaces<Box> mg = new MyGinterfaces<>(new Box());
 
     }
 
