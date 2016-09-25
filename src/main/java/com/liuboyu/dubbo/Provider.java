@@ -22,7 +22,7 @@ public class Provider {
 
         // 连接注册中心配置
         RegistryConfig registry = new RegistryConfig();
-        registry.setAddress("192.168.1.118:2181");
+        registry.setAddress("localhost:2181");
         registry.setProtocol("zookeeper");
 
         // 服务提供者协议配置
