@@ -11,11 +11,12 @@ public class Test {
 
     public static void main(String[] args) throws InterruptedException {
         Work work = new Work();
-        new Thread(work).start();
+        new Thread(work).start(); // subThread. wait forever!
+
         Thread.currentThread().sleep(3000);
         synchronized (waiter) {
             System.out.println("日");
-//            work.waiter.notify();
+            waiter.notify(); // notify subThread
         }
     }
 
