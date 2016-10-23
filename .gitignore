@@ -20,3 +20,7 @@ hdfs.txt
 *.txt
 
 *.properties
+
+*.proto
+
+*.lst
