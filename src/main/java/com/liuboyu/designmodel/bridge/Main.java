@@ -16,8 +16,7 @@ public class Main {
 		DataSource oracleDs = new OracleDS();
 		DataSource mysqlDs = new MysqlDS();
 		
-		Bridge bridge = new JDBCBridge();
-		bridge.setDataSource(mysqlDs);
+		Bridge bridge = new JDBCBridge(mysqlDs);
 		bridge.getConnection();
 		
 		bridge.setDataSource(oracleDs);

@@ -7,6 +7,10 @@ package com.liuboyu.designmodel.bridge;
  */
 public class JDBCBridge extends Bridge {
 
+	public JDBCBridge(DataSource dataSource) {
+		setDataSource(dataSource);
+	}
+
 	public void getConnection() {
 		getDataSource().connection();
 	}
