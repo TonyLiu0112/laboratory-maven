@@ -1,12 +1,15 @@
 package com.liuboyu.designmodel.visitor;
 
 /**
- * 访问者接口
- * @author liuboyu
- *
+ * Created by Tony on 13/03/2017.
  */
 public interface Visitor {
-	
-	public void visit(Node node);
-	
+
+    void visit(Wheel wheel);
+
+    void visit(Engine engine);
+
+    void visit(Car car);
+
+    void visit(Body body);
 }
