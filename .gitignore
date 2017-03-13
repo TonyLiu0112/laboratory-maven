@@ -1,9 +1,7 @@
 
 .DS_Store
 
-.idea/.name
-
-*.xml
+.idea
 
 *.class
 
@@ -13,14 +11,9 @@ IntelliJ IDEA 15 Released 破解 注册码.txt
 
 hdfs.txt
 
-.idea/vcs.xml
-
 *.iml
 
 *.txt
 
-*.properties
-
-*.proto
-
 *.lst
+/target
