@@ -1,39 +1,87 @@
 package com.liuboyu;
 
+import com.liuboyu.common.ConvertUtils;
+
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Tony on 3/5/16.
  */
 public class DoTest {
 
-    public static void main(String[] args) {
-        ArrayList<String> list = new ArrayList<>();
-        list.add("dfjj12");
-        list.add("dfc");
-        list.add("47878");
-        list.add("fijjj48885");
-        deleteNum(list);
+    public static void main(String[] args) throws InstantiationException, IllegalAccessException {
+        DemoModel source = new DemoModel();
+        source.setName("liuboyu");
+
+        List<DemoModel> sourceList = new ArrayList<>();
+        sourceList.add(source);
+
+        List<TargetMdoel> targetList = ConvertUtils.convert(sourceList, TargetMdoel.class);
+
+        targetList.forEach(System.out::println);
+
     }
 
-    private static void deleteNum(ArrayList<String> list) {
-//        for (int x = 0; x < list.size(); x++) {
-//            String s = list.get(x);
-//            for (int i = 0; i < s.length(); i++) {
-//                if (s.charAt(i) > '0' && s.charAt(i) < '9') {
-//                    list.remove(s);
-//                    x--;
-//                    break;
-//                }
-//            }
-//        }
-//
-//        for (String s : list) {
-//            System.out.println(s.toString());
-//        }
-        String flag = "false";
-        boolean a = Boolean.valueOf(flag);
-        System.out.println(a);
+    public static class TargetMdoel {
+        private String name;
+        private int age;
+        private Date time;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public int getAge() {
+            return age;
+        }
+
+        public void setAge(int age) {
+            this.age = age;
+        }
+
+        public Date getTime() {
+            return time;
+        }
+
+        public void setTime(Date time) {
+            this.time = time;
+        }
+    }
+
+    public static class DemoModel {
+        private String name;
+        private int age;
+        private Date time;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public int getAge() {
+            return age;
+        }
+
+        public void setAge(int age) {
+            this.age = age;
+        }
+
+        public Date getTime() {
+            return time;
+        }
+
+        public void setTime(Date time) {
+            this.time = time;
+        }
     }
 
 }
