@@ -1,4 +1,4 @@
-package com.liuboyu;
+package com.liuboyu.simpletest;
 
 import com.liuboyu.common.ConvertUtils;
 

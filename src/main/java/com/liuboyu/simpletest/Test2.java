@@ -1,4 +1,4 @@
-package com.liuboyu;
+package com.liuboyu.simpletest;
 
 public class Test2 implements IA, IB {
 

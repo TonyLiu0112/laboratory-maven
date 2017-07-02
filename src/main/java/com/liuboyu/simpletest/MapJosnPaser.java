@@ -1,4 +1,4 @@
-package com.liuboyu;
+package com.liuboyu.simpletest;
 
 import com.alibaba.fastjson.JSONObject;
 import org.I0Itec.zkclient.ZkClient;

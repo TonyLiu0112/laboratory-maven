@@ -1,4 +1,4 @@
-package com;
+package com.liuboyu.simpletest;
 
 /**
  * 地图对象
