@@ -38,6 +38,9 @@ public class PublisherTest {
             will(new ThrowAction(new NullPointerException("请求参数不能为空!")));
         }});
 
+        System.out.println(localService.doSomething1());
+        System.out.println(localService.doSomething2());
+
         Assert.assertEquals("获取远程基金信息成功.", localService.doSomething1());
         Assert.assertEquals("获取远程股票信息成功.", localService.doSomething2());
         Assert.fail(localService.doSomething3());
