@@ -1,10 +1,16 @@
 package com.liuboyu;
 
+import org.apache.commons.io.IOUtils;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.*;
 
 public class Test {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         List<Map<String, Object>> list = new ArrayList<>();
 
@@ -23,6 +29,17 @@ public class Test {
         System.out.println(set.contains(str)); // false
         System.out.println(set.contains(s));   // true
 
+        encode();
+
+    }
+
+    public static void encode() throws IOException {
+
+        String theString2 = IOUtils.toString(new FileInputStream(new
+                File("/Users/Tony/Documents/工作doc/申万宏源/在线投资顾问/二期/code/bwaccessadvisor-二期/bwaccessadvisor-web/src/main/resources/swagger.yml")), "UTF-8");
+
+        String encode = URLEncoder.encode(theString2, "UTF-8");
+        System.out.println(encode);
 
     }
 

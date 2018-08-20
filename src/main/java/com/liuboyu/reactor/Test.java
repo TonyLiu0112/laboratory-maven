@@ -10,7 +10,7 @@ import java.time.Duration;
 
 public class Test {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws Exception {
 
         // simple
         Flux.just("Hello", "world").subscribe(Test::process);
@@ -58,6 +58,13 @@ public class Test {
     }
 
     private static void process(String msg) {
+        if (msg.equals("Hello")) {
+            try {
+                Thread.sleep(5000L);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
         System.out.println("<" + msg + ">");
     }
 
