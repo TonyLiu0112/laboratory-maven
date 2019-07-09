@@ -20,16 +20,13 @@ public class Test {
 
     public static void main(String[] args) {
         for (int i = 0; i < THREAD_COUNT; i++) {
-            threadPool.execute(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        s.acquire();
-                        System.out.println("save data");
-                        s.release();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+            threadPool.execute(() -> {
+                try {
+                    s.acquire();
+                    System.out.println("save data");
+                    s.release();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             });
         }

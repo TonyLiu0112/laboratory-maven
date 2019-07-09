@@ -270,6 +270,12 @@
             <version>2.0.4</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.bytedeco.javacpp-presets</groupId>
+            <artifactId>opencv</artifactId>
+            <version>4.0.1-1.4.4</version>
+        </dependency>
+
     </dependencies>
 
     <repositories>

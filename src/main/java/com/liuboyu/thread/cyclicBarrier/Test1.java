@@ -24,24 +24,19 @@ public class Test1 {
 
         for (int i = 0; i < 4; i++) {
             final int flag = i;
-            new Thread(new Runnable() {
-
-                @Override
-                public void run() {
-                    try {
-                        Thread.currentThread().sleep(flag * 2000L);
-                        System.out.println("我[" + Thread.currentThread().getName() + "]到徐家汇了,等待其他人");
-                        // 重置计数器
-                        if (flag == 2) cyclicBarrier.reset();
-                        cyclicBarrier.await();
-                        System.out.println(Thread.currentThread().getName() + "] 出发.");
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } catch (BrokenBarrierException e) {
-                        e.printStackTrace();
-                    }
+            new Thread(() -> {
+                try {
+                    Thread.currentThread().sleep(flag * 2000L);
+                    System.out.println("我[" + Thread.currentThread().getName() + "]到徐家汇了,等待其他人");
+                    // 重置计数器
+                    if (flag == 2) cyclicBarrier.reset();
+                    cyclicBarrier.await();
+                    System.out.println(Thread.currentThread().getName() + "] 出发.");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (BrokenBarrierException e) {
+                    e.printStackTrace();
                 }
-
             }).start();
         }
 
