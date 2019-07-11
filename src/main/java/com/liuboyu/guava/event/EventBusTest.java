@@ -17,6 +17,7 @@ import java.util.concurrent.Executors;
  */
 public class EventBusTest {
 
+    @SuppressWarnings("UnstableApiUsage")
     private static EventBus eventBus = new EventBus();
 
     public static void main(String[] args) throws InterruptedException {
@@ -55,6 +56,7 @@ public class EventBusTest {
         @Slf4j
         private static class ListenerA {
 
+            @SuppressWarnings({"UnstableApiUsage", "unused"})
             @Subscribe
             public void stringEvent(String event) {
                 log.info("ListenerA now get event. {}", event);
@@ -64,6 +66,7 @@ public class EventBusTest {
         @Slf4j
         private static class ListenerB {
 
+            @SuppressWarnings({"UnstableApiUsage", "unused"})
             @Subscribe
             public void dogEvent(DogEvent dogEvent) {
                 log.info("ListenerB now get event. {}", dogEvent);
