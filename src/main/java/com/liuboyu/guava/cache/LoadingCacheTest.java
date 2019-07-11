@@ -1,4 +1,4 @@
-package com.liuboyu.guava;
+package com.liuboyu.guava.cache;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
