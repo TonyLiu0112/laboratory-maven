@@ -10,7 +10,7 @@ import java.time.Duration;
 
 public class Test {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         // simple
         Flux.just("Hello", "world").subscribe(Test::process);
         System.out.println();

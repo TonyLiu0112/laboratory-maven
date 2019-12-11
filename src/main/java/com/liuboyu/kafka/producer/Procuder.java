@@ -6,6 +6,7 @@ import kafka.producer.KeyedMessage;
 import com.liuboyu.kafka.config.KafkaConfig;
 import kafka.producer.ProducerConfig;
 
+import java.net.InetAddress;
 import java.util.Properties;
 
 import static com.liuboyu.kafka.Config.KAFKA_SERVER;
@@ -20,7 +21,7 @@ public class Procuder {
 	public Procuder() {
         Properties properties = new Properties();
         properties.put("zk.connect", "192.168.0.216:2181");
-//        properties.put("serializer.class", "kafka.serializer.StringEncoder");
+        properties.put("serializer.class", "kafka.serializer.StringEncoder");
         properties.put("metadata.broker.list", "192.168.0.211:9092,192.168.0.212:9092,192.168.0.213:9092");
 
         ProducerConfig config = new ProducerConfig(properties);
@@ -33,6 +34,17 @@ public class Procuder {
 	public void doSend(String topicName, byte[] message) {
 		KeyedMessage<String, byte[]> keyedMsg = new KeyedMessage<>(topicName, message);
 		producer.send(keyedMsg);
+	}
+
+	public static void main(String[] args) {
+		Properties properties = new Properties();
+		properties.put("serializer.class", "kafka.serializer.StringEncoder");
+//		properties.put("metadata.broker.list", "qs-pro-01:9092,qs-pro-04:9092,qs-pro-05:9092,qs-pro-06:9092");
+		properties.put("metadata.broker.list", "qs-stg-09:9092,qs-stg-02:9092,qs-stg-03:9092");
+
+		ProducerConfig config = new ProducerConfig(properties);
+		Producer<String, String> producer = new Producer<>(config);
+		producer.send(new KeyedMessage<>("tony1", "from client with tony"));
 	}
 	
 }

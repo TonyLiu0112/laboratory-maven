@@ -5,7 +5,10 @@ public class Model {
 	private long id;
 	private long count;
 	private String name;
-	
+
+	public Model() {
+	}
+
 	public Model(long id, long count, String name) {
 		this.id = id;
 		this.name = name;
