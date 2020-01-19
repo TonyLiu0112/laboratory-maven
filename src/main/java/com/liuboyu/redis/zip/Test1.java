@@ -2,7 +2,6 @@ package com.liuboyu.redis.zip;
 
 import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.jedis.JedisShardInfo;
-import redis.clients.jedis.ShardedJedisPipeline;
 import redis.clients.jedis.ShardedJedisPool;
 
 import java.util.LinkedList;
@@ -22,18 +21,12 @@ public class Test1 {
         pool = new ShardedJedisPool(config, list);
     }
 
-    public static void main(String[] args) {
-        ShardedJedisPipeline pipelined = pool.getResource().pipelined();
+    public static void main(String[] args) throws Exception {
+        long begin = System.currentTimeMillis();
         for (int i = 0; i < 10000000; i++) {
-            try {
-                int shardId = i / 500;
-                pipelined.hset("emp.stock.shop." + shardId, "" + i, "10457");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            MethodUtil.getBucketId(CRC64Util.hashByAlgo2(("ddddddd" + i).getBytes()) + "");
         }
-        pipelined.sync();
-        System.out.println("写完了");
+        System.out.println("耗时: " + (System.currentTimeMillis() - begin));
     }
 
 }

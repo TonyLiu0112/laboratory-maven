@@ -1,5 +1,6 @@
 package com.liuboyu.redis.zip;
 
+import lombok.SneakyThrows;
 import redis.clients.jedis.*;
 
 import java.util.LinkedList;
@@ -24,39 +25,62 @@ public class RedisZipTest {
     }
 
     private static void testWriter() throws InterruptedException {
-        new Thread(new Worker(pool.getResource(), 1)).start();
+        new Thread(new Worker(pool.getResource())).start();
         System.out.println("正在写入...");
         Thread.sleep(Integer.MAX_VALUE);
-    }
-
-    private static void pipeline() {
-
     }
 
     private static class Worker implements Runnable {
 
         private final ShardedJedis jedis;
-        private int begin;
 
-        Worker(ShardedJedis jedis, int begin) {
+        Worker(ShardedJedis jedis) {
             this.jedis = jedis;
-            this.begin = begin;
         }
 
         @Override
         public void run() {
             ShardedJedisPipeline pipelined = jedis.pipelined();
-            for (int i = begin; i < 10000000; i++) {
-                try {
-//                    pipelined.hset("stock:$brandId:$erpShop:ddddddd" + i, MethodUtil.getBucketId("stock:$brandId:$erpShop.ddddddd" + i), "64703022465076428889898");
-                    pipelined.hset("stock:$brandId:$erpShop:" + (CRC64Util.hashByAlgo2(("ddddddd" + i).getBytes()) / 500), "ddddddd" + i, "64703022465076428889898");
-                } catch (Exception e) {
-                    e.printStackTrace();
+            for (int i = 0; i < 100; i++) {
+                String brandId = "brand_" + i;
+                for (int j = 0; j < 100; j++) {
+                    String shopId = "shop_" + j;
+                    for (int k = 0; k < 1000; k++) {
+                        String code = "code_" + k;
+                        hsetTile(pipelined, brandId, shopId, code);
+//                        hsetSharding(pipelined, brandId, shopId, code);
+                    }
                 }
+
             }
             pipelined.sync();
             System.out.println("写完了");
         }
+
+        private void hsetTile(ShardedJedisPipeline pipelined, String brandId, String shopId, String code) {
+            String key = "stock:" + brandId + ":" + shopId + ":" + code;
+            try {
+                pipelined.hset(MethodUtil.getBucketId(key), key, "64703022465076428889898");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        private void hsetSharding(ShardedJedisPipeline pipelined, String brandId, String shopId, String code) {
+            String key = "stock:" + brandId + ":" + shopId + ":" + code;
+            try {
+                pipelined.hset(shardKey(key), code, "64703022465076428889898");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        @SneakyThrows
+        private String shardKey(String key) {
+            long shardId = CRC64Util.hashByAlgo2((key).getBytes()) % 20000;
+            return MethodUtil.getBucketId(key + ":" + shardId);
+        }
+
     }
 
 }

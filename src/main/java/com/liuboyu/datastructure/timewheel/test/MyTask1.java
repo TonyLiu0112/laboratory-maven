@@ -8,7 +8,7 @@ public class MyTask1 extends DelayTask {
 
     @Override
     public long execTime() {
-        return TimeUnit.MILLISECONDS.convert(System.currentTimeMillis(), TimeUnit.SECONDS) + 7;
+        return TimeUnit.SECONDS.convert(System.currentTimeMillis(), TimeUnit.MILLISECONDS) + 7;
     }
 
     @Override
