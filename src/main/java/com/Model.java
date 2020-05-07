@@ -1,43 +1,56 @@
 package com;
 
-import com.alibaba.fastjson.annotation.JSONField;
-import lombok.Getter;
-import lombok.Setter;
+import org.apache.commons.lang3.StringUtils;
 
-import java.math.BigDecimal;
-
-@Getter
-@Setter
 public class Model {
 
-    /**店铺名称*/
-    @JSONField(name="store_name")
-    private String shopName;
+    public static String convert(String text) {
+        if (StringUtils.isBlank(text))
+            return text;
+        StringBuilder builder = new StringBuilder();
+        if (text.contains("_")) {
+            String[] worlds = text.split("_");
+            if (worlds.length == 1) {
+                return worlds[0];
+            }
+            for (String world : worlds) {
+                if (StringUtils.isBlank(world))
+                    continue;
+                builder.append(world.substring(0, 1).toUpperCase()).append(world.substring(1));
+            }
+        } else {
+            String[] letters = text.split("");
+            for (String letter : letters) {
+                if (StringUtils.isAllUpperCase(letter)) {
+                    builder.append("_");
+                }
+                builder.append(letter);
+            }
+            if (StringUtils.equals(builder.substring(0, 1), "_")) {
+                builder.deleteCharAt(0);
+            }
+        }
+        return builder.toString();
+    }
 
-    /**店铺编号*/
-    @JSONField(name= "store_code")
-    private String shopCode;
-    @JSONField(name= "stat_time")
-    private String statTime;
-    @JSONField(name= "flow_all")
-    private Integer humanFlow;
-    @JSONField(name= "flow_around")
-    private Integer trafficOutOfDoor;
-    @JSONField(name= "flow_in")
-    private Integer inStoreFlow;
-    @JSONField(name= "customer_new")
-    private Integer newCustomers;
-    @JSONField(name= "customer_old")
-    private Integer oldCustomers;
-    @JSONField(name= "remain_duration_avg")
-    private Integer remainDurationAvg;
-    @JSONField(name= "flow_in_rate")
-    private BigDecimal inStoreRate;
-    @JSONField(name= "flow_in_depth_rate")
-    private BigDecimal depthInterviewsRate;
-    @JSONField(name= "bounce_rate")
-    private BigDecimal bounceRate;
-    @JSONField(name= "end_time")
-    private String endTime;
+    public static void main(String[] args) {
+        String text1 = "WhatIsYouName";
+        String text2 = "WhatIs_You_Name";
+        String text3 = "What_Is_You_Name";
+        String text4 = "What_";
+        String text5 = "_What_";
+        String text6 = "_What";
+        String text7 = "";
+        String text8 = "      ";
+
+        System.out.println(convert(text1));
+        System.out.println(convert(text2));
+        System.out.println(convert(text3));
+        System.out.println(convert(text4));
+        System.out.println(convert(text5));
+        System.out.println(convert(text6));
+        System.out.println(convert(text7));
+        System.out.println(convert(text8));
+    }
 
 }
