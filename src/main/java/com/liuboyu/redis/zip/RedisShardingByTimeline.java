@@ -56,7 +56,7 @@ public class RedisShardingByTimeline {
     @SneakyThrows
     private static String shardKey(String key) {
         long shardId = CRC64Util.hashByAlgo2((key).getBytes()) % 20000;
-        return MethodUtil.getBucketId(key + ":" + shardId);
+        return null; // MethodUtil.getBucketId(key + ":" + shardId);
     }
 
 }

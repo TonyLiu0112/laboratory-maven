@@ -24,7 +24,7 @@ public class Simple {
         s.init(a, b, c);
 
 
-        Map<String, Integer> result = new HashMap<String, Integer>() {{
+        Map<String, Integer> result = new TreeMap<String, Integer>() {{
             put("server:a", 0);
             put("server:b", 0);
             put("server:c", 0);
@@ -64,7 +64,7 @@ public class Simple {
     }
 
     @AllArgsConstructor
-    private class Offset {
+    private static class Offset {
         private int value;
     }
 

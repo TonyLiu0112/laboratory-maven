@@ -5,7 +5,7 @@ import net.jodah.expiringmap.ExpiringMap;
 
 import java.util.concurrent.TimeUnit;
 
-public class Test {
+public class ExpirationTest {
 
     public static void main(String[] args) throws InterruptedException {
         ExpiringMap<String, String> map = ExpiringMap.builder()

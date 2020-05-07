@@ -1,5 +1,7 @@
 package com.liuboyu.redis;
 
+import com.github.wxisme.bloomfilter.bitset.RedisBitSet;
+import com.github.wxisme.bloomfilter.common.BloomFilter;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import redis.clients.jedis.HostAndPort;
@@ -9,29 +11,21 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class KiisooTest {
+
+    private static final double FALSE_POSITIVE_PROBABILITY = 0.01;
+    private static final int EXPECTED_NUMBER_OF_ELEMENTS = 100000000;
+
     public static void main(String[] args) throws Exception {
         JedisCluster jedis = getDBJedisCluster();
 
-        String str = jedis.hget("dc4ef4027bf", "shopid");
-        long[] sids = null;
+        BloomFilter<String> blacklistFilter = new BloomFilter<>(FALSE_POSITIVE_PROBABILITY, EXPECTED_NUMBER_OF_ELEMENTS);
+        blacklistFilter.bind(new RedisBitSet(jedis, "flow.bm.blacklist"));
 
-        String[] ss = StringUtils.split(str, ",");
-
-        String ky = "flow.rt.day." + "43546";
-        System.out.println("in:" + jedis.hget(ky, "in"));
-        System.out.println("around:" + jedis.hget(ky, "around"));
-        System.out.println("all:" + jedis.hget(ky, "all"));
-        System.out.println("oc:" + jedis.hget(ky, "oc"));
-
-        if (ss != null) {
-            sids = new long[ss.length];
-            for (int i = 0; i < ss.length; i++) {
-                sids[i] = NumberUtils.toLong(ss[i]);
-            }
-            System.out.println(sids[0]);
-        }
+        String key = "44701.2059aa01a6cc";
+        System.out.println(blacklistFilter.contains(key));
 
     }
+
     private static JedisCluster getDBJedisCluster() throws Exception {
         String hostAndPorts = "10.173.32.198:6380,10.173.32.68:6380,10.173.32.198:6381,10.173.32.68:6381,10.173.32.69:6380,10.173.32.89:6380,10.173.32.69:6381,10.173.32.89:6381";
         String[] hps = StringUtils.split(hostAndPorts, ',');

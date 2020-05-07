@@ -11,6 +11,8 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+import static java.util.concurrent.TimeUnit.*;
+
 /**
  * 时间轮
  * <p>
@@ -55,6 +57,7 @@ public class TimingWheel {
     public void scroll() {
         pointer.move();
         TickSlot slot = slots[pointer.offset];
+        // thread unsafe operating
         Map<Boolean, List<DelayTask>> taskGroup = slot.getTasks().stream().peek(task -> task.setLayer(task.getLayer() - 1)).collect(Collectors.groupingBy(task -> task.getLayer() < 0));
         if (MapUtils.isEmpty(taskGroup))
             return;
@@ -78,7 +81,7 @@ public class TimingWheel {
     @Data
     private class TwPointer {
         private int offset = 0;
-        private long timeLine = TimeUnit.SECONDS.convert(System.currentTimeMillis(), TimeUnit.MILLISECONDS);
+        private long timeLine = SECONDS.convert(System.currentTimeMillis(), MILLISECONDS);
 
         private void move() {
             offset++;

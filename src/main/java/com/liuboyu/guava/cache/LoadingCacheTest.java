@@ -12,6 +12,9 @@ public class LoadingCacheTest {
 
     private static LoadingCache<Long, AtomicLong> loadingCache = CacheBuilder.newBuilder()
             .expireAfterWrite(2, TimeUnit.SECONDS)
+            .removalListener(notification -> {
+
+            })
             .build(new CacheLoader<Long, AtomicLong>() {
 
                 @Override
@@ -23,7 +26,6 @@ public class LoadingCacheTest {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         long limit = 1000L;
-
         while (true) {
 
         }

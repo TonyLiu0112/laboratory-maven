@@ -49,10 +49,10 @@ public class RedisClient {
 	public RedisClient init() {
 		initConfig();
 		
-		jedisPool = new JedisPool(poolconfig, "www.tony666.com", 6379);
+		jedisPool = new JedisPool(poolconfig, "localhost", 6379);
 		
 		List<JedisShardInfo> shards = new ArrayList<JedisShardInfo>(); 
-        shards.add(new JedisShardInfo("www.tony666.com", 6379, "master"));
+        shards.add(new JedisShardInfo("localhost", 6379, "master"));
 		shardedJedisPool = new ShardedJedisPool(poolconfig, shards);
 		
 		jedis = jedisPool.getResource();
@@ -123,7 +123,8 @@ public class RedisClient {
 	
 	public static void main(String[] args) {
 		RedisClient redisClient = new RedisClient().init();
-		redisClient.operationHash();
+//		redisClient.operationHash();
+		System.out.println(redisClient.jedis.lpop("orders"));
 	}
 	
 }
