@@ -22,7 +22,7 @@ public class Test extends RecursiveTask<Long> {
     }
 
     private static void test() {
-        System.out.println("test");
+        System.out.println("test1");
         long start = System.currentTimeMillis();
         long sum = 0L;
         for (long i = 0L; i <= MAX; i++) {

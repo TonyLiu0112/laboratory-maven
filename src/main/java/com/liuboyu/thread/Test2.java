@@ -8,7 +8,7 @@ public class Test2 {
     private final Process process = new Process();
 
     public void doService() throws InterruptedException {
-        System.out.println("doService");
+        System.out.println("doService2");
         System.out.println(process.toString());
         Thread.sleep(1000L);
         process.stop();
